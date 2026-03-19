@@ -1,27 +1,24 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { colors } from '../theme/colors';
-import { radius } from '../theme/radius';
-import { spacing } from '../theme/spacing';
+import { Image, StyleSheet, View } from 'react-native';
 
 export default function FooterBanner() {
   return (
-    <View style={styles.banner}>
-      <Text style={styles.text}>Footer técnico depois</Text>
+    <View style={styles.container}>
+      <Image
+        source={require('../../assets/images/footer.png')} // troca pelo seu arquivo
+        style={styles.image}
+        resizeMode="contain"
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  banner: {
-    height: 180,
-    borderRadius: radius.lg,
-    backgroundColor: '#BDBDBD',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: spacing.xxl,
+  container: {
+    marginTop: 24,
+    alignItems: 'center', // centraliza a imagem
   },
-  text: {
-    color: colors.text,
-    fontWeight: '700',
+  image: {
+    width: 500, // NÃO usa 100%
+    height: 200,
   },
 });

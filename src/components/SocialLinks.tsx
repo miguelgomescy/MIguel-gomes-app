@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Feather, FontAwesome, AntDesign } from '@expo/vector-icons';
 
 import { colors } from '../theme/colors';
@@ -19,7 +19,8 @@ type Props = {
 function renderIcon(icon: string) {
   switch (icon) {
     case 'linkedin':
-      return <AntDesign name="linkedin-square" size={20} color={colors.text} />;
+     <AntDesign name="linkedin-square" size={20} color={colors.text} />;
+
     case 'instagram':
       return <Feather name="instagram" size={20} color={colors.text} />;
     case 'github':
@@ -29,22 +30,44 @@ function renderIcon(icon: string) {
     case 'globe':
       return <Feather name="globe" size={20} color={colors.text} />;
     default:
-      return null;
+      case 'mail':
+      return <Feather name="mail" size={20} color={colors.text} />; 
+    
   }
 }
 
 export default function SocialLinks({ items }: Props) {
+  async function handleOpenLink(url: string) {
+    const supported = await Linking.canOpenURL(url);
+
+    if (supported) {
+      await Linking.openURL(url);
+    }
+  }
+
   return (
     <View style={styles.grid}>
       {items.map((item) => (
-        <TouchableOpacity key={item.id} style={styles.card}>
+        <Pressable
+          key={item.id}
+          style={styles.card}
+          onPress={() => handleOpenLink(item.url)}
+        >
           {renderIcon(item.icon)}
           <Text style={styles.text}>{item.label}</Text>
-        </TouchableOpacity>
+        </Pressable>
       ))}
     </View>
   );
 }
+
+
+
+
+
+
+
+/* Estilização */
 
 const styles = StyleSheet.create({
   grid: {

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { colors } from '../theme/colors';
 import { radius } from '../theme/radius';
 import { spacing } from '../theme/spacing';
@@ -6,7 +6,11 @@ import { spacing } from '../theme/spacing';
 export default function ContactSection() {
   return (
     <View style={styles.card}>
-      <View style={styles.image} />
+      <Image
+        source={require('../../assets/images/miguel_icon.png')}
+        style={styles.image}
+        resizeMode="cover"
+      />
       <View style={styles.input}>
         <Text style={styles.placeholder}>Seu nome</Text>
       </View>

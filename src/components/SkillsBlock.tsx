@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors } from '../theme/colors';
 import { radius } from '../theme/radius';
 import { spacing } from '../theme/spacing';
@@ -6,20 +6,36 @@ import { typography } from '../theme/typography';
 
 type SkillsBlockProps = {
   title: string;
-  content: string;
+  icons: any[];
+  isOpen: boolean;
+  onPress: () => void;
   dark?: boolean;
 };
 
 export default function SkillsBlock({
   title,
-  content,
+  icons,
+  isOpen,
+  onPress,
   dark = false,
 }: SkillsBlockProps) {
+  const visibleIcons = isOpen ? icons : icons.slice(0, 5);
+
   return (
-    <View style={[styles.card, dark && styles.cardDark]}>
+    <Pressable
+      style={[styles.card, dark && styles.cardDark]}
+      onPress={onPress}
+    >
       <Text style={[styles.title, dark && styles.titleDark]}>{title}</Text>
-      <Text style={[styles.text, dark && styles.textDark]}>{content}</Text>
-    </View>
+
+      <View style={styles.iconsGrid}>
+        {visibleIcons.map((icon, index) => (
+          <View key={index} style={styles.iconWrapper}>
+            <Image source={icon} style={styles.icon} resizeMode="contain" />
+          </View>
+        ))}
+      </View>
+    </Pressable>
   );
 }
 
@@ -44,11 +60,19 @@ const styles = StyleSheet.create({
   titleDark: {
     color: colors.white,
   },
-  text: {
-    fontSize: typography.body,
-    color: colors.textMuted,
+  iconsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: spacing.sm,
   },
-  textDark: {
-    color: '#EAEAEA',
+  iconWrapper: {
+    width: '18%',
+    aspectRatio: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  icon: {
+    width: 28,
+    height: 28,
   },
 });

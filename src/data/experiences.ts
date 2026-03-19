@@ -1,7 +1,7 @@
 export const experiences = [
   {
     id: 'cymidia',
-    period: '2024 - momento',
+    period: '2024 - Momento',
     company: 'Agência CyMidia',
     role: 'Desenvolvedor Full-Stack',
     bullets: [
@@ -12,7 +12,7 @@ export const experiences = [
   },
   {
     id: 'autonomo',
-    period: '2023 - momento',
+    period: '2023 - Momento',
     company: 'Miguel Gomes',
     role: 'Gestor de tráfego e vendedor',
     bullets: [
